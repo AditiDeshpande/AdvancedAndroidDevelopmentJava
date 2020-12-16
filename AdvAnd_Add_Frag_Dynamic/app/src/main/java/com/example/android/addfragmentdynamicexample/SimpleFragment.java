@@ -39,6 +39,10 @@ public class SimpleFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static SimpleFragment newInstance(){
+        return new SimpleFragment();
+    }
+
     /**
      * Creates the view for the fragment.
      *
