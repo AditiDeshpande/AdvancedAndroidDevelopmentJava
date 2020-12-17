@@ -16,17 +16,22 @@
 
 package com.example.android.addfragmentdynamicexample;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mButton;
+    private Button mNextButton;
     private boolean isFragmentDisplayed = false;
+    private TextView mTextViewArticle;
+    private TextView mTextViewTitle;
     /*
     To save the boolean value representing the Fragment display state
     define a key for the Fragment state to use in the savedInstanceState
@@ -39,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTextViewTitle = findViewById(R.id.title);
+        mTextViewArticle = findViewById(R.id.article);
+        mTextViewArticle.setText(R.string.article1);
+        mTextViewTitle.setText(R.string.title1);
 
         mButton = findViewById(R.id.open_button);
         if(savedInstanceState != null){
@@ -57,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
                 } else{
                   closeFragment();
                 }
+            }
+        });
+
+        mNextButton = findViewById(R.id.nav_button);
+        mNextButton.setText(R.string.next);
+        mNextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                startActivity(intent);
             }
         });
 

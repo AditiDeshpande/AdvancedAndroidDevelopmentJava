@@ -37,6 +37,9 @@
     <!-- Text for the button in FragmentExample2. -->
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="next">Next</string>
+    <string name="prev">Previous</string>
+
 
     <!-- Text for the exception message in FragmentCommunicate. -->
     <string name="exception_message">must implement OnFragmentInteractionListener</string>
