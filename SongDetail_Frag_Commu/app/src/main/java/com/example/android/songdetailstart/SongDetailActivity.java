@@ -54,6 +54,7 @@ public class SongDetailActivity extends AppCompatActivity {
             be having song_detail_container then how come following code will
             run properly? this is from activity layout. Yes this one is with
             same name but from activity_song_detail activity layout.
+            Here we r adding fragment
              */
             SongDetailFragment fragment =
                     SongDetailFragment.newInstance(selectedSong);

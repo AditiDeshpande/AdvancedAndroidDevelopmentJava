@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         replace transaction to show a new version of the fragment.
                         By replacing the fragment u can refresh with new data a fragment is already
                         running. This is from song_list layout rt?
+                        Here we r replacing the fragment.
                          */
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.song_detail_container , fragment)
