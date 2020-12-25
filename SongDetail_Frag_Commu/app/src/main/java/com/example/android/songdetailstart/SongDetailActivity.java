@@ -45,10 +45,22 @@ public class SongDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // This activity displays the detail. In a real-world scenario,
-        // get the data from a content repository.
-        mSong = SongUtils.SONG_ITEMS.get
-                (getIntent().getIntExtra(SongUtils.SONG_ID_KEY, 0));
+        if(savedInstanceState == null){
+            int selectedSong =
+                    getIntent().getIntExtra(SongUtils.SONG_ID_KEY , 0);
+            /*
+            Query but this code will run if screen size is not 900 rt?
+            then this must be having song_list layout the default one which won't
+            be having song_detail_container then how come following code will
+            run properly? this is from activity layout. Yes this one is with
+            same name but from activity_song_detail activity layout.
+             */
+            SongDetailFragment fragment =
+                    SongDetailFragment.newInstance(selectedSong);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.song_detail_container , fragment)
+                    .commit();
+        }
 
     }
 

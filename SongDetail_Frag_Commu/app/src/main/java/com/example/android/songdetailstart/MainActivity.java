@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
         lower than 900dp, and so it will not show a two-pane layout. If the tablet
         is set to horizontal orientation and its width is 900dp or larger , it will
         show a two-pane layout.
+        activity_song_list is layout in it including song_list only 900 one has
+        song_detail_container and it's loading at song list itself. If not
+        screen size 900 it won't be there default song_list will be there
+        so it will go to SongDetailActivity it's layout and it's own container
+        with same name as following but activity's container
          */
         if(findViewById(R.id.song_detail_container) != null){
             mTwoPane = true;
@@ -131,14 +136,27 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     /*
                     following extra data should be sent to the Fragment
-                    instead of activity.
+                    instead of activity. Removing code for Activity.
                      */
-                    Context context = v.getContext();
-                    Intent intent = new Intent(context,
-                            SongDetailActivity.class);
-                    intent.putExtra(SongUtils.SONG_ID_KEY,
-                            holder.getAdapterPosition());
-                    context.startActivity(intent);
+                    if(mTwoPane){
+                        int selectedSong = holder.getAdapterPosition();
+                        SongDetailFragment fragment = SongDetailFragment.newInstance(selectedSong);
+                        /*
+                        replace transaction to show a new version of the fragment.
+                        By replacing the fragment u can refresh with new data a fragment is already
+                        running. This is from song_list layout rt?
+                         */
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.song_detail_container , fragment)
+                                .addToBackStack(null)
+                                .commit();
+                    }else{
+                        Context context = v.getContext();
+                        Intent intent = new Intent(context , SongDetailActivity.class);
+                        intent.putExtra(SongUtils.SONG_ID_KEY ,
+                                holder.getAdapterPosition());
+                        context.startActivity(intent);
+                    }
                 }
             });
         }
