@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Note: The default provider-info file also includes the attribute
+android:initialKeyguardLayout.
+This attribute enables you to provide a different layout
+for keyguard (lock screen) widgets.
+Previous versions of Android (4.2/API 17 to 4.4/API 19)
+allowed widgets to appear on the lock screen.
+Although the app widget tools and APIs still occasionally
+mention lock screen widgets,
+that functionality is deprecated.
+-->
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialKeyguardLayout="@layout/new_app_widget"
     android:initialLayout="@layout/new_app_widget"

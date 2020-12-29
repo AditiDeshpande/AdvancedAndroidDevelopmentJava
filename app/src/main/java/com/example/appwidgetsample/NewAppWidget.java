@@ -7,21 +7,38 @@ import android.widget.RemoteViews;
 
 /**
  * Implementation of App Widget functionality.
+ *
+ * This file is the widget provider , the Java file that defines
+ * the behavior for your widget. The key task for a widget provider
+ * is to handle widget update intents. App widgets extend the
+ * AppWidgetProvider , which in turn extends BroadcastReceiver.
+ */
+
+/*
+Unlike activities , where u only inflate the layout once and then
+modify it in place as new data appears , the entire app widget layout
+must be reconstructed and redisplayed each time the widget receives
+an update intent.
+
  */
 public class NewAppWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
+
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.new_app_widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+        views.setTextViewText(R.id.appwidget_id, String.valueOf(appWidgetId));
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
+    /*
+    This method is called the first time the widget runs and again
+    each time the widget receives an update request(a broadcast intent)
+     */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
@@ -30,13 +47,5 @@ public class NewAppWidget extends AppWidgetProvider {
         }
     }
 
-    @Override
-    public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
-    }
 
-    @Override
-    public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
-    }
 }
