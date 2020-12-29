@@ -39,6 +39,13 @@ public class NewAppWidget extends AppWidgetProvider {
     This method is called the first time the widget runs and again
     each time the widget receives an update request(a broadcast intent)
      */
+    /*
+    The data your app widget contains can be updated by 2 ways
+    1. The widget can update itself at regular intervals.
+    u can define the interval in the widget's provider file
+    2. The widget's associated app can request a widget update
+    explicitly
+    */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
