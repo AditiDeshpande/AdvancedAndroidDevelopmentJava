@@ -1,8 +1,10 @@
 package com.example.appwidgetsample;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 import java.util.Date;
@@ -59,6 +61,35 @@ public class NewAppWidget extends AppWidgetProvider {
         SharedPreferences.Editor prefEditor = prefs.edit();
         prefEditor.putInt(COUNT_KEY + appWidgetId , count);
         prefEditor.apply();
+
+        /*
+        The new intent is an explicit intent with the widget-provider
+        class(NewAppWidget.class) as the target component.
+         */
+        Intent intentUpdate = new Intent(context , NewAppWidget.class);
+        intentUpdate.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+
+        /*
+        The intent needs an array of app widget IDs to update.
+        In this case there is only the current widget ID, but that
+        ID still needs to be wrapped in an array.
+         */
+        int[] idArray = new int[]{appWidgetId};
+        intentUpdate.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                idArray);
+
+        PendingIntent pendingUpdate = PendingIntent.getBroadcast(
+                context , appWidgetId , intentUpdate,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+
+        /*
+        Tip:
+        In this step , a single view (button) sends the pending intent.
+        To have the entire widget send a pending intent , give an ID
+        to the top-level widget layout view. Specify that ID as the
+        first argument in the setOnClickPendingIntent() method.
+         */
+        views.setOnClickPendingIntent(R.id.button_update,pendingUpdate);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
